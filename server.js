@@ -18,3 +18,33 @@ app.use(express.json());
 sequelize.sync({ force: true }).then(() => {
     app.listen(PORT, () => console.log('Now listening'));
   });
+
+
+
+// inquirer prompt user for action
+
+
+
+// switch statements that corresponds to user choice
+
+
+
+// function to view departments
+
+
+// function to view roles
+
+
+// function to view employees
+
+
+// function to add department
+
+
+// function to add role
+
+
+// function to add employee
+
+
+// function to update employee role
