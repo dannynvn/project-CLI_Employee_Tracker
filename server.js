@@ -1,6 +1,7 @@
 // import and require express and mysql2
 const express = require('express');
 const mysql = require('mysql2');
+const inquirer = require('inquirer');
 const sequelize = require('./config/connection');
 
 
@@ -17,6 +18,7 @@ app.use(express.json());
 // connect to database and server
 sequelize.sync({ force: true }).then(() => {
     app.listen(PORT, () => console.log('Now listening'));
+    userPrompt();
   });
 
 
@@ -28,7 +30,7 @@ const userPrompt = () => {
         type: "list",
         message: "What would you like to do?",
         name: "option",
-        options: [
+        choices: [
                   "View all departments", 
                   "View all roles",
                   "View all employees", 
@@ -39,6 +41,7 @@ const userPrompt = () => {
                 ]
         }
     ])
+    // switch statements that corresponds to user choice
     .then(function(data) {
         switch (data.option) {
             case "View all departments":
@@ -73,26 +76,45 @@ const userPrompt = () => {
 };
 
 
-// switch statements that corresponds to user choice
-
-
 
 // function to view departments
-
+const viewDepartments = () => {
+    console.log("viewing departments");
+    return;
+};
 
 // function to view roles
-
+const viewRoles = () => {
+    console.log("viewing roles");
+    return;
+};
 
 // function to view employees
-
+const viewEmployees = () => {
+    console.log("viewing employees");
+    return;
+};
 
 // function to add department
-
+const addDepartment = () => {
+    console.log("adding departments");
+    return;
+};
 
 // function to add role
-
+const addRole = () => {
+    console.log("adding role");
+    return;
+};
 
 // function to add employee
-
+const addEmployee = () => {
+    console.log("adding employee");
+    return;
+};
 
 // function to update employee role
+const updateEmployeeRole = () => {
+    console.log("updating employee role");
+    return;
+};
