@@ -22,7 +22,55 @@ sequelize.sync({ force: true }).then(() => {
 
 
 // inquirer prompt user for action
+const userPrompt = () => {
+    inquirer.prompt([
+        {
+        type: "list",
+        message: "What would you like to do?",
+        name: "option",
+        options: [
+                  "View all departments", 
+                  "View all roles",
+                  "View all employees", 
+                  "Add department",
+                  "Add role",
+                  "Add employee",
+                  "Update employee role"
+                ]
+        }
+    ])
+    .then(function(data) {
+        switch (data.option) {
+            case "View all departments":
+                viewDepartments();
+                break;
 
+            case "View all roles":
+                viewRoles();
+                break;
+
+            case "View all employees":
+                viewEmployees();
+                break;
+
+            case "Add department":
+                addDepartment();
+                break;
+
+            case "Add role":
+                addRole();
+                break;
+
+            case "Add employee":
+                addEmployee();
+                break;
+
+            case "Update employee role":
+                updateEmployeeRole();
+                break;
+            }
+    })
+};
 
 
 // switch statements that corresponds to user choice
