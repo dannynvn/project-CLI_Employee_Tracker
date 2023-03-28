@@ -1,4 +1,4 @@
-INSERT INTO departments (name)
+INSERT INTO departments (department_name)
     VALUE ("Product"),
           ("Engineering"),
           ("Member Experience"),
@@ -16,8 +16,12 @@ INSERT INTO roles (job_title, salary, department_id)
 
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-    VALUE ("Dan", "Ng", 4, 2),
-          ("Meeko", "Mikolai", 5, null),
-          ("Dolly", "Vu", 2, null),
-          ("Terry", "De", 6, null),
-          ("Tim", "Tare", 6, 4);
+    VALUE ("Dan", "Ng", 24, null);
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
+    VALUE ("Dolly", "Vu", 21, null);
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
+    VALUE ("Terry", "De", 23, null);
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
+    VALUE ("Meeko", "Mikolai", 19, 45);
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
+    VALUE ("Tim", "Tare", 22, 46);
