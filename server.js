@@ -90,13 +90,19 @@ const viewDepartments = () => {
 // function to view roles
 const viewRoles = () => {
     console.log("viewing roles");
-    return;
+    sequelize.query("SELECT * FROM roles;", { type: sequelize.QueryTypes.SELECT })
+    .then(results => {
+        console.table(results)
+    })
 };
 
 // function to view employees
 const viewEmployees = () => {
     console.log("viewing employees");
-    return;
+    sequelize.query("SELECT * FROM employees;", { type: sequelize.QueryTypes.SELECT })
+    .then(results => {
+        console.table(results)
+    })
 };
 
 // function to add department
