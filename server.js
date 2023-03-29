@@ -3,6 +3,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const sequelize = require('./config/connection');
+const { QueryTypes } = require('sequelize');
 
 
 // declare port and instantiate express app
@@ -80,7 +81,10 @@ const userPrompt = () => {
 // function to view departments
 const viewDepartments = () => {
     console.log("viewing departments");
-    return;
+    sequelize.query("SELECT * FROM departments;", { type: sequelize.QueryTypes.SELECT })
+    .then(results => {
+        console.table(results)
+    })
 };
 
 // function to view roles
