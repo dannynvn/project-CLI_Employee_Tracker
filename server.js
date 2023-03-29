@@ -3,7 +3,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const sequelize = require('./config/connection');
-const { QueryTypes } = require('sequelize');
+const { QueryTypes, QueryInterface } = require('sequelize');
 
 
 // declare port and instantiate express app
@@ -38,7 +38,8 @@ const userPrompt = () => {
                   "Add department",
                   "Add role",
                   "Add employee",
-                  "Update employee role"
+                  "Update employee role",
+                  "Exit"
                 ]
         }
     ])
@@ -72,7 +73,9 @@ const userPrompt = () => {
             case "Update employee role":
                 updateEmployeeRole();
                 break;
-            }
+            case "Exit":
+                process.exit();
+        }
     })
 };
 
@@ -85,6 +88,7 @@ const viewDepartments = () => {
     .then(results => {
         console.table(results)
     })
+    userPrompt();
 };
 
 // function to view roles
