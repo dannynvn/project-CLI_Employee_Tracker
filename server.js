@@ -41,7 +41,10 @@ const userPrompt = () => {
                   "Update employee role",
                   "Exit"
                 ]
-        }
+        },
+        // {
+        //     type
+        // }
     ])
     // switch statements that corresponds to user choice
     .then(function(data) {
@@ -87,8 +90,10 @@ const viewDepartments = () => {
     sequelize.query("SELECT * FROM departments;", { type: sequelize.QueryTypes.SELECT })
     .then(results => {
         console.table(results)
+        console.log("=================================================")
+        userPrompt();
     })
-    userPrompt();
+    
 };
 
 // function to view roles
