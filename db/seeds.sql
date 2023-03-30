@@ -16,12 +16,12 @@ INSERT INTO roles (job_title, salary, department_id)
 
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-    VALUE ("Dan", "Ng", 24, null);
+    VALUE ("Dan", "Ng", 4, null);
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-    VALUE ("Dolly", "Vu", 21, null);
+    VALUE ("Dolly", "Vu", 3, null);
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-    VALUE ("Terry", "De", 23, null);
+    VALUE ("Terry", "De", 5, null);
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-    VALUE ("Meeko", "Mikolai", 19, 45);
+    VALUE ("Meeko", "Mikolai", 1, 2);
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-    VALUE ("Tim", "Tare", 22, 46);
+    VALUE ("Tim", "Tare", 4, 3);

@@ -102,6 +102,8 @@ const viewRoles = () => {
     sequelize.query("SELECT * FROM roles;", { type: sequelize.QueryTypes.SELECT })
     .then(results => {
         console.table(results)
+        console.log("=================================================")
+        userPrompt();
     })
 };
 
@@ -111,19 +113,57 @@ const viewEmployees = () => {
     sequelize.query("SELECT * FROM employees;", { type: sequelize.QueryTypes.SELECT })
     .then(results => {
         console.table(results)
+        console.log("=================================================")
+        userPrompt();
     })
 };
 
 // function to add department
 const addDepartment = () => {
-    console.log("adding departments");
-    return;
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "dept_name",
+            message: "What is the department name?"
+        }
+    ])
+    .then(function(res) {
+        sequelize.query('INSERT INTO departments (department_name) VALUE ("' + res.dept_name + '")', { type: sequelize.QueryTypes.INSERT })
+        .then(results => {
+            console.log("=================================================")
+            console.table("Added new department!")
+            userPrompt();
+        }); 
+    });
 };
 
 // function to add role
 const addRole = () => {
-    console.log("adding role");
-    return;
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "job_title",
+            message: "What is the role's title?"
+        },
+        {
+            type: "input",
+            name: "salary",
+            message: "What is the role's salary?"
+        },
+        {
+            type: "input",
+            name: "dept_id",
+            message: "Which department is this role under? (Enter department id number)"
+        }
+    ])
+    .then(function(res) {
+        sequelize.query('INSERT INTO roles (job_title, salary, department_id) VALUE ("' + res.job_title + '", "' + res.salary + '", "' + res.dept_id + '")', { type: sequelize.QueryTypes.INSERT })
+        .then(results => {
+            console.log("=================================================")
+            console.table("Added new role!")
+            userPrompt();
+        }); 
+    });
 };
 
 // function to add employee
