@@ -24,7 +24,7 @@ sequelize.sync({ force: true }).then(() => {
 
 
 
-// inquirer prompt user for action
+// ====inquirer prompt user for action====
 const userPrompt = () => {
     inquirer.prompt([
         {
@@ -42,11 +42,8 @@ const userPrompt = () => {
                   "Exit"
                 ]
         },
-        // {
-        //     type
-        // }
     ])
-    // switch statements that corresponds to user choice
+    // ===switch statements that corresponds to user choice===
     .then(function(data) {
         switch (data.option) {
             case "View all departments":
@@ -84,7 +81,7 @@ const userPrompt = () => {
 
 
 
-// function to view departments
+// ===function to view departments===
 const viewDepartments = () => {
     console.log("viewing departments");
     sequelize.query("SELECT * FROM departments;", { type: sequelize.QueryTypes.SELECT })
@@ -96,7 +93,7 @@ const viewDepartments = () => {
     
 };
 
-// function to view roles
+// ===function to view roles===
 const viewRoles = () => {
     console.log("viewing roles");
     sequelize.query("SELECT * FROM roles;", { type: sequelize.QueryTypes.SELECT })
@@ -107,7 +104,7 @@ const viewRoles = () => {
     })
 };
 
-// function to view employees
+// ===function to view employees===
 const viewEmployees = () => {
     console.log("viewing employees");
     sequelize.query("SELECT * FROM employees;", { type: sequelize.QueryTypes.SELECT })
@@ -118,7 +115,7 @@ const viewEmployees = () => {
     })
 };
 
-// function to add department
+// ===function to add department===
 const addDepartment = () => {
     inquirer.prompt([
         {
@@ -137,7 +134,7 @@ const addDepartment = () => {
     });
 };
 
-// function to add role
+// ===function to add role===
 const addRole = () => {
     inquirer.prompt([
         {
@@ -166,8 +163,9 @@ const addRole = () => {
     });
 };
 
-// function to add employee
+// ===function to add employee===
 const addEmployee = () => {
+    viewRoles();
     inquirer.prompt([
         {
             type: "input",
@@ -200,8 +198,26 @@ const addEmployee = () => {
     });
 };
 
-// function to update employee role
+// ===function to update employee role===
 const updateEmployeeRole = () => {
-    console.log("updating employee role");
-    return;
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "emp_id",
+            message: "What is the employee's id?"
+        },
+        {
+            type: "input",
+            name: "role_id",
+            message: "What is the new role id?"
+        },
+    ])
+    .then(function(res) {
+        sequelize.query('UPDATE employees SET role_id = ' + res.role_id + ' WHERE id = ' + res.emp_id + ';', { type: sequelize.QueryTypes.UPDATE })
+        .then(results => {
+            console.log("=================================================")
+            console.table("Added new employee!")
+            userPrompt();
+        }); 
+    });
 };
