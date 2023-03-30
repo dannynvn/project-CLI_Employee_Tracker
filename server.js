@@ -96,7 +96,7 @@ const viewDepartments = () => {
 // ===function to view roles===
 const viewRoles = () => {
     console.log("viewing roles");
-    sequelize.query("SELECT * FROM roles;", { type: sequelize.QueryTypes.SELECT })
+    sequelize.query("SELECT roles.id, roles.job_title, roles.salary, department_name FROM roles JOIN departments ON roles.department_id = departments.id;", { type: sequelize.QueryTypes.SELECT })
     .then(results => {
         console.table(results)
         console.log("=================================================")
@@ -107,7 +107,7 @@ const viewRoles = () => {
 // ===function to view employees===
 const viewEmployees = () => {
     console.log("viewing employees");
-    sequelize.query("SELECT * FROM employees;", { type: sequelize.QueryTypes.SELECT })
+    sequelize.query("SELECT employees.id, CONCAT(employees.first_name, ' ' , employees.last_name) AS name, roles.job_title AS role, roles.salary, departments.department_name AS department, CONCAT(e.first_name, ' ' ,e.last_name) AS manager FROM employees JOIN roles ON employees.role_id = roles.id JOIN departments ON roles.department_id = departments.id LEFT JOIN employees e on employees.manager_id = e.id;", { type: sequelize.QueryTypes.SELECT })
     .then(results => {
         console.table(results)
         console.log("=================================================")
@@ -165,7 +165,6 @@ const addRole = () => {
 
 // ===function to add employee===
 const addEmployee = () => {
-    viewRoles();
     inquirer.prompt([
         {
             type: "input",
