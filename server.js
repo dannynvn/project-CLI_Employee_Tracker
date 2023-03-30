@@ -168,8 +168,36 @@ const addRole = () => {
 
 // function to add employee
 const addEmployee = () => {
-    console.log("adding employee");
-    return;
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "first_name",
+            message: "What is the employee's first name?"
+        },
+        {
+            type: "input",
+            name: "last_name",
+            message: "What is the employee's last name?"
+        },
+        {
+            type: "input",
+            name: "role_id",
+            message: "What is the employee's job title? (Enter role id number)"
+        },
+        {
+            type: "input",
+            name: "manager_id",
+            message: "Who is the employee's manager? (Enter manager id number)"
+        },
+    ])
+    .then(function(res) {
+        sequelize.query('INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUE ("' + res.first_name + '", "' + res.last_name + '", "' + res.role_id + '", "' + res.manager_id + '")', { type: sequelize.QueryTypes.INSERT })
+        .then(results => {
+            console.log("=================================================")
+            console.table("Added new employee!")
+            userPrompt();
+        }); 
+    });
 };
 
 // function to update employee role
